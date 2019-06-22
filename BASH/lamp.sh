@@ -6,12 +6,17 @@ echo -e "\e[1;32m ------>yum install httpd success \e[0m"
 service httpd start 2>&1 &&
 if [ $? -eq 0 ];then
 	echo -e "\e[1;32m ------>start httpd success \e[0m"
+	echo -e "httpd version:\n`httpd -v`"
 fi
 #----------------------------------------2.install mysql-------------------------------------------
-yum -y localinstall http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm 2>&1 &&
-echo -e "\e[1;32m ------>yum install mysql57 source success \e[0m"
+mysql_source=`ls /etc/yum.repos.d | grep mysql | wc -l`
+if [ $mysql_source -eq 0 ];then
+	yum -y localinstall http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm
+fi
+echo -e "\e[1;32m ------>yum install mysql source success \e[0m"
 yum -y install mysql-community-server 2>&1 &&
-echo -e "\e[1;32m ------>yum install mysql57 success \e[0m"
+echo -e "\e[1;32m ------>yum install mysql success \e[0m"
+echo -e "mysql version:\n`mysql --version`"
 service mysqld start 2>&1 &&
 if [ $? -eq 0 ];then
 	echo -e "\e[1;32m ------>start mysql success \e[0m"
