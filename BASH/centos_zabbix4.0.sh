@@ -3,8 +3,8 @@
 YumLog=/var/log/update.log
 lamplog=/var/log/lamp.log
 #yum update
-yum -y update 1>>$YumLog 2>&1 &&
-echo -e "\e[4;36m ------>1.yum update success \e[0m"
+# yum -y update 1>>$YumLog 2>&1 &&
+# echo -e "\e[4;36m ------>1.yum update success \e[0m"
 
 #install lamp
 yum install -y httpd mariadb-server mariadb php php-mysql php-gd libjpeg* php-ldap php-odbc php-pear php-xml php-xmlrpc php-mhash 1>>$lamplog 2>&1 &&
