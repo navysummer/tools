@@ -36,20 +36,13 @@ echo -e $str3
 # mysqladmin -u root -p`echo $pwd` password $newpwd
 # echo -e "\e[1;32m ------>alter mysql password success \e[0m"
 #----------------------------------------4.install django and flask-------------------------------------------
-getCommand(){
-	if  command -v $1 > /dev/null; then
-    	return 1
-	else
-	    return 0
-	fi
-}
-getCommand curl
-if [ $? -eq 0 ];then
+check_curl=`command -v curl | wc -l`
+if [ $check_curl -eq 0 ];then
 	yum -y install curl
 fi
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py 2>&1 &&
-getCommand python
-if [ $? -eq 0 ];then
+check_python=`command -v python | wc -l`
+if [ $check_python -eq 0 ];then
 	yum -y install python
 fi
 echo -e "python version:`python -V`"
